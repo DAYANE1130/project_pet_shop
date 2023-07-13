@@ -14,7 +14,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "4.17.1"
+    "dotenv": "^16.3.1",
+    "express": "4.17.1",
+    "mysql2": "^3.5.1"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.6.6",
