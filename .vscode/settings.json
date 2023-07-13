@@ -6,6 +6,7 @@
     "Servidor- app.js e server.js",
     "Conexao com banco de dados",
     "Camada service",
-    "Camada controller"
+    "Camada controller",
+    "Escopo conventional commits"
   ]
 }
