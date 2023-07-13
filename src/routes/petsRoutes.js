@@ -1,9 +1,10 @@
 const route = require('express').Router();
+const petsControllers = require('../controllers/petsController');
 
-route.post('/pet');
-route.get('/pet');
-route.get('/pet/:id'); // conferir
-route.put('/pet/:id');
-route.delete('/pet/:id');
+route.post('/');
+route.get('/', petsControllers.getAll);
+route.get('/:id'); // conferir
+route.put('/:id');
+route.delete('/:id');
 
 module.exports = route;
