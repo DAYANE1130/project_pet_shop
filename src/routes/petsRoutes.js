@@ -1,5 +1,5 @@
 const route = require('express').Router();
-const petsControllers = require('../controllers/petsController');
+const petsControllers = require('../controllers/petsControllers');
 
 route.post('/');
 route.get('/', petsControllers.getAll);
