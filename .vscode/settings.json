@@ -8,6 +8,7 @@
     "Camada service",
     "Camada controller",
     "Escopo conventional commits",
-    "middlewareError"
+    "middlewareError",
+    "configuracao"
   ]
 }
