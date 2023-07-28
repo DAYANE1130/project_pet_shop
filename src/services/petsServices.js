@@ -5,4 +5,10 @@ const getAll = async () => {
   return pets;
 };
 
-module.exports = { getAll };
+const getById = async (id) => {
+  if (!id) return false;
+  const pet = await petsModels.getById(id);
+  return pet;
+};
+
+module.exports = { getAll, getById };
