@@ -11,4 +11,11 @@ const getById = async (id) => {
   return pet;
 };
 
-module.exports = { getAll, getById };
+const update = async (id, nome) => {
+  const findPet = await getById(id);
+  if (!findPet) return false;
+  const petUpdated = await petsModels.update(id, nome);
+  return petUpdated;
+};
+
+module.exports = { getAll, getById, update };
