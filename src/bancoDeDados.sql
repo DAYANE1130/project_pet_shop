@@ -6,26 +6,26 @@ USE pet_shop;
 
 CREATE TABLE
     donos(
-        dono_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+        id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
         nome VARCHAR(50) NOT NULL,
         email VARCHAR(50) NOT NULL,
-        telefone VARCHAR(50) NOT NULL
+        telefone VARCHAR(50) NOT NULL,
         rua VARCHAR(50) NOT NULL,
         numero INT NOT NULL,
         cidade VARCHAR(50) NOT NULL,
         estado VARCHAR(50) NOT NULL,
-        cep VARCHAR(50) NOT NULL,
+        cep VARCHAR(50) NOT NULL
     ) ENGINE = InnoDB;
 
 CREATE TABLE
     pets(
-        pet_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+        id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
         dono_id INT NOT NULL,
         tipo VARCHAR(50) NOT NULL,
         nome VARCHAR(50) NOT NULL,
         idade INT NOT NULL,
         raca VARCHAR(50) NOT NULL,
-        FOREIGN KEY(dono_id) REFERENCES donos(dono_id) ON DELETE CASCADE
+        FOREIGN KEY(dono_id) REFERENCES donos(id) ON DELETE CASCADE
 ) ENGINE = InnoDB;
 
 
@@ -39,7 +39,6 @@ INSERT INTO pets (dono_id, tipo, nome, idade, raca)
 VALUES (1, 'Cachorro', 'Rex', 3, 'Labrador'),
        (2, 'Gato', 'Miau', 2, 'Siamese'),
        (3, 'Cachorro', 'Thor', 5, 'Bulldog');
-
 
 
 
