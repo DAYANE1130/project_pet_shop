@@ -6,4 +6,11 @@ const getAll = async () => {
   return pets;
 };
 
-module.exports = { getAll };
+const getById = async (id) => {
+  const query = 'SELECT * FROM pet_shop.pets WHERE id=?';
+  const [[pet]] = await connection.execute(query, [id]);
+  console.log(pet);
+  return pet;
+};
+
+module.exports = { getAll, getById };
