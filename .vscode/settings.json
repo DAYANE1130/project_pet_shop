@@ -1,15 +1,15 @@
 {
   "conventionalCommits.scopes": [
-    "gitignore",
-    "package.json",
+    "Gitignore",
+    "Package.json",
     "Rotas",
     "Servidor- app.js e server.js",
     "Conexao com banco de dados",
     "Camada service",
     "Camada controller",
     "Escopo conventional commits",
-    "middlewareError",
+    "MiddlewareError",
 
-    "camada models"
+    "Camada models"
   ]
 }
