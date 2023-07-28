@@ -13,4 +13,10 @@ const getById = async (id) => {
   return pet;
 };
 
-module.exports = { getAll, getById };
+const update = async (id, nome) => {
+  const query = 'UPDATE  pet_shop.pets SET nome=? WHERE id=?';
+  const [petUpdated] = await connection.execute(query, [id, nome]);
+  return { id: petUpdated.insertId, nome };
+};
+
+module.exports = { getAll, getById, update };
