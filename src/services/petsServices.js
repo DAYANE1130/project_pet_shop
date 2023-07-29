@@ -18,4 +18,11 @@ const update = async (id, nome) => {
   return petUpdated;
 };
 
-module.exports = { getAll, getById, update };
+const remove = async (id) => {
+  const findPet = await getById(id);
+  if (!findPet) return false;
+  const petDeleted = await petsModels.remove(id);
+  return petDeleted; // melhor retornar o id que deletei
+};
+
+module.exports = { getAll, getById, update, remove };
