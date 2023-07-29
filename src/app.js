@@ -7,8 +7,7 @@ const errorMiddleware = require('./middlewares/error');
 const app = express();
 app.use(express.json());
 
-app.use('/pets', petsRoutes);
-app.use('/pet', petsRoutes);
+app.use('/', petsRoutes);
 app.use('/clientes', clientesRoutes);
 
 app.use(errorMiddleware);
