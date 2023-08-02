@@ -1,5 +1,15 @@
 const connection = require('./connection');
 
+const create = async (data) => {
+  let obj = data;
+  const { tipo, nome, idade, raca } = data;
+  const { dono_id: donoId, ...rest } = data;
+  obj = { donoId, ...rest };
+  const query = 'INSERT INTO pet_shop.pets(dono_id, tipo, nome, idade, raca) VALUES (?,?,?,?,?)';
+  const [{ insertId }] = await connection.execute(query, [donoId, tipo, nome, idade, raca]);
+  return { insertId, ...obj };
+};
+
 const getAll = async () => {
   const query = 'SELECT * FROM pet_shop.pets';
   const [pets] = await connection.execute(query);
@@ -12,10 +22,10 @@ const getById = async (id) => {
   return pet;
 };
 
-const update = async (id, nome) => {
-  const query = 'UPDATE  pet_shop.pets SET nome=? WHERE id=?';
-  const [petUpdated] = await connection.execute(query, [nome, id]);
-  return { id: petUpdated.insertId, nome };
+const update = async (id, body) => {
+  const query = `UPDATE pet_shop.pets SET ${body.keys} WHERE id=?`;
+  const [petUpdated] = await connection.execute(query, [...body.values, id]);
+  return { id: petUpdated.insertId, updatedData: body.values };
 };
 
 const remove = async (id) => {
@@ -24,4 +34,4 @@ const remove = async (id) => {
   return petDeleted;
 };
 
-module.exports = { getAll, getById, update, remove };
+module.exports = { create, getAll, getById, update, remove };
