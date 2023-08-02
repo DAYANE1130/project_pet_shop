@@ -1,4 +1,10 @@
 const petsModels = require('../models/petsModels');
+const getKeysAndValues = require('../utils');
+
+const create = async (data) => {
+  const newPet = await petsModels.create(data);
+  return newPet;
+};
 
 const getAll = async () => {
   const pets = await petsModels.getAll();
@@ -11,11 +17,12 @@ const getById = async (id) => {
   return pet;
 };
 
-const update = async (id, nome) => {
+const update = async (id, body) => {
   const findPet = await getById(id);
   if (!findPet) return false;
-  const petUpdated = await petsModels.update(id, nome);
-  return petUpdated;
+  const bodyPet = await getKeysAndValues(body);
+  const petEdited = await petsModels.update(id, bodyPet);
+  return petEdited;
 };
 
 const remove = async (id) => {
@@ -25,4 +32,4 @@ const remove = async (id) => {
   return petDeleted; // melhor retornar o id que deletei
 };
 
-module.exports = { getAll, getById, update, remove };
+module.exports = { create, getAll, getById, update, remove };
