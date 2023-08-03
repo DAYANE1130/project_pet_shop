@@ -6,6 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node src/server.js",
+    "swagger-autogen": "node src/swagger.js",
     "dev": "nodemon src/server.js",
     "lint": "eslint --no-inline-config --no-error-on-unmatched-pattern -c .eslintrc.json .",
     "commitmsg": "commitlint -E HUSKY_GIT_PARAMS"
@@ -14,10 +15,13 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "and": "^0.0.3",
     "dotenv": "^16.3.1",
     "express": "4.17.1",
     "express-async-errors": "^3.1.1",
-    "mysql2": "^3.5.1"
+    "mysql2": "^3.5.1",
+    "swagger-autogen": "^2.23.5",
+    "swagger-ui-express": "^5.0.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.6.6",
