@@ -10,6 +10,7 @@
     "Escopo conventional commits",
     "MiddlewareError",
     "Camada models",
-    "Funcoes complementares"
+    "Funcoes complementares",
+    "Configuracao Swagger"
   ]
 }
