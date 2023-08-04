@@ -8,5 +8,10 @@ const create = async (data) => {
   const [{ insertId }] = await connection.execute(query, [...bodyData]);
   return { id: insertId, ...data };
 };
+const getAll = async () => {
+  const query = 'SELECT * FROM pet_shop.donos';
+  const [donos] = await connection.execute(query);
+  return donos;
+};
 
-module.exports = { create };
+module.exports = { create, getAll };
