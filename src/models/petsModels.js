@@ -21,7 +21,6 @@ const getById = async (id) => {
   const [[pet]] = await connection.execute(query, [id]);
   return pet;
 };
-
 const update = async (id, body) => {
   const query = `UPDATE pet_shop.pets SET ${body.keys} WHERE id=?`;
   const [petUpdated] = await connection.execute(query, [...body.values, id]);
