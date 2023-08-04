@@ -1,9 +1,14 @@
 const donosModels = require('../models/donosModels');
-// const { responseFormatedDono } = require('../utils');
+const { responseFormatedDono } = require('../utils');
 
 const create = async (data) => {
   const newDono = await donosModels.create(data);
   return newDono;
 };
 
-module.exports = { create };
+const getAll = async () => {
+  const donos = await donosModels.getAll();
+  const dataDonos = responseFormatedDono(donos);
+  return dataDonos;
+};
+module.exports = { create, getAll };
