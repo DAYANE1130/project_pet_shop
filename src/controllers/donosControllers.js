@@ -20,5 +20,12 @@ const getById = async (req, res) => {
   if (!dono) return res.status(NOTFOUND).json({ message: 'Dono not found' });
   return res.status(OK).json(dono);
   };
-  
-module.exports = { create, getAll, getById };
+
+  const remove = async (req, res) => {
+    const { id } = req.params;
+    const donoDeleted = await donosServices.remove(Number(id));
+    if (!donoDeleted) return res.status(NOTFOUND).json({ message: 'Dono not found' });
+    return res.status(OK).json({ message: 'Dono successfully deleted' });
+    };
+    
+module.exports = { create, getAll, getById, remove };
