@@ -21,4 +21,10 @@ const getById = async (id) => {
   return dono;
 };
 
-module.exports = { create, getAll, getById };
+const remove = async (id) => {
+  const query = 'DELETE FROM pet_shop.donos WHERE id=?';
+  const [donoDeleted] = await connection.execute(query, [id]);
+  return donoDeleted;
+  };
+
+module.exports = { create, getAll, getById, remove };
