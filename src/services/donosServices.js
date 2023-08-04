@@ -11,4 +11,12 @@ const getAll = async () => {
   const dataDonos = responseFormatedDono(donos);
   return dataDonos;
 };
-module.exports = { create, getAll };
+
+const getById = async (id) => {
+  const dono = await donosModels.getById(id);
+  if (dono.length === 0) return false;
+  const dataDono = responseFormatedDono(dono);
+  return dataDono;
+  };
+
+module.exports = { create, getAll, getById };
