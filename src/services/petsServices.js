@@ -1,5 +1,5 @@
 const petsModels = require('../models/petsModels');
-const getKeysAndValues = require('../utils');
+const { getKeysAndValues } = require('../utils');
 
 const create = async (data) => {
   const newPet = await petsModels.create(data);
