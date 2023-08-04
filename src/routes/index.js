@@ -1,7 +1,7 @@
 const petsRoutes = require('./petsRoutes');
-const clientesRoutes = require('./clientesRoutes');
+const donosRoutes = require('./donosRoutes');
 
  module.exports = {
    petsRoutes,
-   clientesRoutes,
+   donosRoutes,
  };

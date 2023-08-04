@@ -9,7 +9,7 @@ const app = express();
 app.use(express.json());
 
 app.use('/', routes.petsRoutes);
-app.use('/', routes.clientesRoutes);
+app.use('/', routes.donosRoutes);
 app.use('/doc', swaggerUi.serve, swaggerUi.setup(swaggerFile));
 app.use(errorMiddleware);
 
