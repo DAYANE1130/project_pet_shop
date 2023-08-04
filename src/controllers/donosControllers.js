@@ -1,7 +1,7 @@
 const donosServices = require('../services/donosServices');
 
 const OK = 200;
-// const NOTFOUND = 404;
+ const NOTFOUND = 404;
 
 const create = async (req, res) => {
   const data = req.body;
@@ -14,4 +14,11 @@ const getAll = async (req, res) => {
   return res.status(OK).json(donos);
 };
 
-module.exports = { create, getAll };
+const getById = async (req, res) => {
+  const { id } = req.params;
+  const dono = await donosServices.getById(id);
+  if (!dono) return res.status(NOTFOUND).json({ message: 'Dono not found' });
+  return res.status(OK).json(dono);
+  };
+  
+module.exports = { create, getAll, getById };
