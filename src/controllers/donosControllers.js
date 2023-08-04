@@ -9,4 +9,9 @@ const create = async (req, res) => {
   return res.status(OK).json(newDono);
 };
 
-module.exports = { create };
+const getAll = async (req, res) => {
+  const donos = await donosServices.getAll();
+  return res.status(OK).json(donos);
+};
+
+module.exports = { create, getAll };
