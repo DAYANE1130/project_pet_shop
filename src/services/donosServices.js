@@ -19,4 +19,11 @@ const getById = async (id) => {
   return dataDono;
   };
 
-module.exports = { create, getAll, getById };
+  const remove = async (id) => {
+    const findDono = await getById(id);
+    if (!findDono) return false;
+    const donoDeleted = await donosModels.remove(id);
+    return donoDeleted;
+    };
+
+module.exports = { create, getAll, getById, remove };
