@@ -3,8 +3,8 @@ const connection = require('./connection');
 const create = async (data) => {
   const { nome, email, telefone, rua, numero, cidade, estado, cep } = data;
   const bodyData = [nome, email, telefone, rua, numero, cidade, estado, cep];
-  const query = 'INSERT INTO pet_shop.donos(nome, email,telefone,rua,numero,cidade,estado,cep)'
-    + 'VALUES(?,?,?,?,?,?,?,?)';
+  const fields = 'nome, email,telefone,rua,numero,cidade,estado,cep';
+  const query = `INSERT INTO pet_shop.donos(${fields}) VALUES(?,?,?,?,?,?,?,?)`;
   const [{ insertId }] = await connection.execute(query, [...bodyData]);
   return { id: insertId, ...data };
 };
@@ -20,6 +20,9 @@ const getById = async (id) => {
   const [dono] = await connection.execute(query, [id]);
   return dono;
 };
+// const update = async (id, body) => {
+// const query = `UPDATE pet_shop.donos SET ${body.keys}`
+// };
 
 const remove = async (id) => {
   const query = 'DELETE FROM pet_shop.donos WHERE id=?';
