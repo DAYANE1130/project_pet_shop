@@ -20,14 +20,17 @@ const getById = async (id) => {
   const [dono] = await connection.execute(query, [id]);
   return dono;
 };
-// const update = async (id, body) => {
-// const query = `UPDATE pet_shop.donos SET ${body.keys}`
-// };
+
+const update = async (id, body) => {
+  const query = `UPDATE pet_shop.donos SET ${body.keys} WHERE id=?`;
+  const [{ insertId }] = await connection.execute(query, [...body.values, id]);
+  return { insertId, updatedData: body.values };
+};
 
 const remove = async (id) => {
   const query = 'DELETE FROM pet_shop.donos WHERE id=?';
   const [donoDeleted] = await connection.execute(query, [id]);
   return donoDeleted;
-  };
+};
 
-module.exports = { create, getAll, getById, remove };
+module.exports = { create, getAll, getById, update, remove };
