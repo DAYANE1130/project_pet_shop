@@ -5,6 +5,17 @@ CREATE SCHEMA pet_shop;
 USE pet_shop;
 
 CREATE TABLE
+    users(
+        id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+        fullName VARCHAR(100) NOT NULL,
+        email VARCHAR(50) NOT NULL,
+        password VARCHAR(50) NOT NULL,
+        created_at datetime,
+        updated_at datetime
+    
+    ) ENGINE = InnoDB;
+
+CREATE TABLE
     donos(
         id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
         nome VARCHAR(50) NOT NULL,
@@ -27,6 +38,11 @@ CREATE TABLE
         raca VARCHAR(50) NOT NULL,
         FOREIGN KEY(dono_id) REFERENCES donos(id) ON DELETE CASCADE
 ) ENGINE = InnoDB;
+
+INSERT INTO users (fullName, email, password, created_at, updated_at)
+VALUES ('Ana Pereira', 'ana@example.com', 'senhaabc', '2023-08-07', '2023-08-07'),
+       ('Pedro Santos', 'pedro@example.com', 'senha789', '2023-08-07', '2023-08-07'),
+       ('Maria Oliveira', 'maria@example.com', 'senha456', '2023-08-07', '2023-08-07');
 
 
 INSERT INTO donos (nome, email, telefone, rua, numero, cidade, estado, cep)
