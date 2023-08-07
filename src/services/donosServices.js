@@ -1,5 +1,6 @@
 const donosModels = require('../models/donosModels');
 const { responseFormatedDono } = require('../utils');
+const { getKeysAndValues } = require('../utils');
 
 const create = async (data) => {
   const newDono = await donosModels.create(data);
@@ -17,13 +18,21 @@ const getById = async (id) => {
   if (dono.length === 0) return false;
   const dataDono = responseFormatedDono(dono);
   return dataDono;
-  };
+};
 
-  const remove = async (id) => {
-    const findDono = await getById(id);
-    if (!findDono) return false;
-    const donoDeleted = await donosModels.remove(id);
-    return donoDeleted;
-    };
+const update = async (id, body) => {
+  const findDono = await getById(id);
+  if (!findDono) return false;
+  const bodyDono = await getKeysAndValues(body);
+  const donoUpdated = await donosModels.update(id, bodyDono);
+ return donoUpdated;
+};
 
-module.exports = { create, getAll, getById, remove };
+const remove = async (id) => {
+  const findDono = await getById(id);
+  if (!findDono) return false;
+  const donoDeleted = await donosModels.remove(id);
+  return donoDeleted;
+};
+
+module.exports = { create, getAll, getById, update, remove };
