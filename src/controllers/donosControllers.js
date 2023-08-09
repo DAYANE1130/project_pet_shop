@@ -1,38 +1,36 @@
+const { StatusCodes } = require('http-status-codes');
 const donosServices = require('../services/donosServices');
-
-const OK = 200;
-const NOTFOUND = 404;
 
 const create = async (req, res) => {
   const data = req.body;
   const newDono = await donosServices.create(data);
-  return res.status(OK).json(newDono);
+  return res.status(StatusCodes.OK).json(newDono);
 };
 
 const getAll = async (req, res) => {
   const donos = await donosServices.getAll();
-  return res.status(OK).json(donos);
+  return res.status(StatusCodes.OK).json(donos);
 };
 
-const getById = async (req, res) => {
+const getById = async (req, res, next) => {
   const { id } = req.params;
   const dono = await donosServices.getById(id);
-  if (!dono) return res.status(NOTFOUND).json({ message: 'Dono not found' });
-  return res.status(OK).json(dono);
+  if (!dono) return next({ status: 'Not found', message: 'Dono not found' });
+  return res.status(StatusCodes.OK).json(dono);
 };
 
-const update = async (req, res) => {
+const update = async (req, res, next) => {
   const { id } = req.params;
   const donoUpdated = await donosServices.update(id, req.body);
-  if (!donoUpdated) return res.status(NOTFOUND).json({ message: 'Dono not found' });
-  res.status(OK).json(donoUpdated);
+  if (!donoUpdated) return next({ status: 'Not found', message: 'Dono not found' });
+  res.status(StatusCodes.OK).json(donoUpdated);
 };
 
-const remove = async (req, res) => {
+const remove = async (req, res, next) => {
   const { id } = req.params;
   const donoDeleted = await donosServices.remove(Number(id));
-  if (!donoDeleted) return res.status(NOTFOUND).json({ message: 'Dono not found' });
-  return res.status(OK).json({ message: 'Dono successfully deleted' });
+  if (!donoDeleted) return next({ status: 'Not found', message: 'Dono not found' });
+  return res.status(StatusCodes.OK).json({ message: 'Dono successfully deleted' });
 };
 
 module.exports = { create, getAll, getById, update, remove };
