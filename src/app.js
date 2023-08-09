@@ -8,9 +8,11 @@ const errorMiddleware = require('./middlewares/error');
 const app = express();
 app.use(express.json());
 
+app.use('/', routes.usersRoutes);
 app.use('/', routes.petsRoutes);
 app.use('/', routes.donosRoutes);
+
 app.use('/doc', swaggerUi.serve, swaggerUi.setup(swaggerFile));
-app.use(errorMiddleware);
+app.use(errorMiddleware.errorHandler);
 
 module.exports = app;
