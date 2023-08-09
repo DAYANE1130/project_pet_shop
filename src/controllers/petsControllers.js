@@ -1,38 +1,36 @@
+const { StatusCodes } = require('http-status-codes');
 const petsServices = require('../services/petsServices');
-
-const OK = 200;
-const NOTFOUND = 404;
 
 const create = async (req, res) => {
   const data = req.body;
   const newPet = await petsServices.create(data);
-  return res.status(OK).json(newPet);
+  return res.status(StatusCodes.OK).json(newPet);
 };
 
 const getAll = async (req, res) => {
   const pets = await petsServices.getAll();
-  return res.status(OK).json(pets);
+  return res.status(StatusCodes.OK).json(pets);
 };
 
-const getById = async (req, res) => {
+const getById = async (req, res, next) => {
   const { id } = req.params;
   const pet = await petsServices.getById(id);
-  if (!pet) return res.status(NOTFOUND).json({ message: 'Pet not found' });
-  return res.status(OK).json(pet);
+  if (!pet) return next({ status: 'Not found', message: 'Dono not found' });
+  return res.status(StatusCodes.OK).json(pet);
 };
 
-const update = async (req, res) => {
+const update = async (req, res, next) => {
   const { id } = req.params;
   const petEdited = await petsServices.update(Number(id), req.body);
-  if (!petEdited) return res.status(NOTFOUND).json({ message: 'Pet not found' });
-  return res.status(OK).json(petEdited);
+  if (!petEdited) return next({ status: 'Not found', message: 'Dono not found' });
+  return res.status(StatusCodes.OK).json(petEdited);
 };
 
-const remove = async (req, res) => {
+const remove = async (req, res, next) => {
   const { id } = req.params;
   const petDeleted = await petsServices.remove(Number(id));
-  if (!petDeleted) return res.status(NOTFOUND).json({ message: 'Pet not found' });
-  return res.status(OK).json({ message: 'Pet successfully deleted' });
+  if (!petDeleted) return next({ status: 'Not found', message: 'Dono not found' });
+  return res.status(StatusCodes.OK).json({ message: 'Pet successfully deleted' });
 };
 
 module.exports = { create, getAll, getById, update, remove };
