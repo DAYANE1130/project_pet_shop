@@ -1,13 +1,11 @@
 const connection = require('./connection');
 
 const create = async (data) => {
-  let obj = data;
   const { tipo, nome, idade, raca } = data;
-  const { dono_id: donoId, ...rest } = data;
-  obj = { donoId, ...rest };
+  const { dono_id: donoId } = data;
   const query = 'INSERT INTO pet_shop.pets(dono_id, tipo, nome, idade, raca) VALUES (?,?,?,?,?)';
   const [{ insertId }] = await connection.execute(query, [donoId, tipo, nome, idade, raca]);
-  return { insertId, ...obj };
+  return { insertId, ...data };
 };
 
 const getAll = async () => {
