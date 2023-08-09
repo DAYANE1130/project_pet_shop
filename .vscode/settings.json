@@ -11,6 +11,7 @@
     "MiddlewareError",
     "Camada models",
     "Funcoes complementares",
-    "Configuracao Swagger"
+    "Configuracao Swagger",
+    "Tabela banco de dados"
   ]
 }
