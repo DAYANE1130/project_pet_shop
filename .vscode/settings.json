@@ -12,6 +12,7 @@
     "Camada models",
     "Funcoes complementares",
     "Configuracao Swagger",
-    "Tabela banco de dados"
+    "Tabela banco de dados",
+    "Middleware de Validacoes"
   ]
 }
