@@ -15,21 +15,21 @@ const getAll = async (req, res) => {
 const getById = async (req, res, next) => {
   const { id } = req.params;
   const dono = await donosServices.getById(id);
-  if (!dono) return next({ status: 'Not found', message: 'Dono not found' });
+  if (!dono) return next({ status: StatusCodes.NOT_FOUND, message: 'Dono not found' });
   return res.status(StatusCodes.OK).json(dono);
 };
 
 const update = async (req, res, next) => {
   const { id } = req.params;
   const donoUpdated = await donosServices.update(id, req.body);
-  if (!donoUpdated) return next({ status: 'Not found', message: 'Dono not found' });
+  if (!donoUpdated) return next({ status: StatusCodes.NOT_FOUND, message: 'Dono not found' });
   res.status(StatusCodes.OK).json(donoUpdated);
 };
 
 const remove = async (req, res, next) => {
   const { id } = req.params;
   const donoDeleted = await donosServices.remove(Number(id));
-  if (!donoDeleted) return next({ status: 'Not found', message: 'Dono not found' });
+  if (!donoDeleted) return next({ status: StatusCodes.NOT_FOUND, message: 'Dono not found' });
   return res.status(StatusCodes.OK).json({ message: 'Dono successfully deleted' });
 };
 
