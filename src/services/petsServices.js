@@ -1,7 +1,11 @@
 const petsModels = require('../models/petsModels');
+const donosModels = require('../models/donosModels');
 const { getKeysAndValues } = require('../utils');
 
 const create = async (data) => {
+  const { dono_id: donoId } = data;
+  const dono = await donosModels.getById(donoId);
+  if (dono.length === 0) return false;
   const newPet = await petsModels.create(data);
   return newPet;
 };
@@ -29,7 +33,7 @@ const remove = async (id) => {
   const findPet = await getById(id);
   if (!findPet) return false;
   const petDeleted = await petsModels.remove(id);
-  return petDeleted; // melhor retornar o id que deletei
+  return petDeleted;
 };
 
 module.exports = { create, getAll, getById, update, remove };
