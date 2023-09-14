@@ -1,9 +1,10 @@
 const { StatusCodes } = require('http-status-codes');
 const petsServices = require('../services/petsServices');
 
-const create = async (req, res) => {
+const create = async (req, res, next) => {
   const data = req.body;
   const newPet = await petsServices.create(data);
+  if (!newPet) return next({ status: StatusCodes.BAD_REQUEST, message: 'Dono not found' });
   return res.status(StatusCodes.OK).json(newPet);
 };
 
@@ -30,7 +31,7 @@ const remove = async (req, res, next) => {
   const { id } = req.params;
   const petDeleted = await petsServices.remove(Number(id));
   if (!petDeleted) return next({ status: StatusCodes.NOT_FOUND, message: 'Dono not found' });
-  return res.status(StatusCodes.OK).json({ message: 'Pet successfully deleted' });
+  return res.status(StatusCodes.OK).json({ message: ' Pet successfully deleted ' });
 };
 
 module.exports = { create, getAll, getById, update, remove };
