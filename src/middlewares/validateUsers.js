@@ -1,23 +1,37 @@
 const { StatusCodes } = require('http-status-codes');
+const {
+  verifyFieldsIsNotBlank,
+  verifyDataIsString,
+  verifyFormatEmail,
+  verifyPasswordStrength } = require('../utils');
+
+const passwordRule = 'Password must have uppercase and uppercase letters,numbers between 0 and 9';
+const symbolsRule = 'and any of the special characters :@!#$%^&*';
 
 const errors = {
-  firstNameOrLastNameIsNotValid: '"firs_name" and "last_name" must be a string',
+  fieldsIsBlank: 'Attributes are missing',
+  fieldsIsNotStrings: 'fields  must be a strings',
   emailIsNotValid: '"email" must be a valid email',
   passwordIsNotValid: '"password" length must be at least 6 characters long',
+  weakPassword: `${passwordRule} ${symbolsRule}`,
 };
 
-// VAI SER ESSE STATUS PARA TODO MUNDO?
-const validateFirstLastName = (req, _res, next) => {
-  const { first_name: firstName, last_name: lastName } = req.body;
-  if (typeof firstName !== 'string' || typeof lastName !== 'string') {
-    return next({ status: StatusCodes.BAD_REQUEST, message: errors.firstNameOrLastNameIsNotValid });
+const validateFields = (req, _res, next) => {
+  const { first_name: firstName, last_name: lastName, email, password } = req.body;
+  const fields = [firstName, lastName, email, password];
+  if (!verifyFieldsIsNotBlank(fields)) {
+    return next({ status: StatusCodes.BAD_REQUEST, message: errors.fieldsIsBlank });
   }
   next();
 };
 
-const verifyFormatEmail = (email) => {
-  const regex = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/;
-  return regex.test(email);
+const validateDataType = (req, _res, next) => {
+  const { first_name: firstName, last_name: lastName } = req.body;
+  const fieldsStrings = [firstName, lastName];
+  if (!verifyDataIsString(fieldsStrings)) {
+    return next({ status: StatusCodes.BAD_REQUEST, message: errors.fieldsIsNotStrings });
+  }
+  next();
 };
 
 const validateEmail = (req, _res, next) => {
@@ -33,7 +47,10 @@ const validatePassword = (req, _res, next) => {
   if (password.length < 6) {
     return next({ status: StatusCodes.BAD_REQUEST, message: errors.passwordIsNotValid });
   }
+  if (!verifyPasswordStrength(password)) {
+    return next({ status: StatusCodes.BAD_REQUEST, message: errors.weakPassword });
+  }
   next();
 };
 
-module.exports = { validateFirstLastName, validateEmail, validatePassword };
+module.exports = { validateFields, validateDataType, validateEmail, validatePassword };
