@@ -19,7 +19,27 @@
             "name": "body",
             "in": "body",
             "required": true,
-            "type": "object"
+            "schema": {
+              "type": "object",
+              "properties": {
+                "dono_id": {
+                  "type": "string"
+                },
+                "tipo": {
+                  "type": "string"
+                },
+                "nome": {
+                  "type": "string"
+                },
+                "idade": {
+                  "type": "integer"
+                },
+                "raca": {
+                  "type": "string"
+                }
+              },
+              "required": ["dono_id", "tipo", "nome", "idade", "raca"]
+            }
           }
         ],
         "responses": {

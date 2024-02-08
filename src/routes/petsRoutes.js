@@ -11,7 +11,7 @@ route.get('/pet/:id', petsControllers.getById);
 
 route.delete('/pet/:id', petsControllers.remove);
 route.patch('/pet/:id',
-   validatePets.validateFields,
+   // validatePets.validateFields,
   // validatePets.validateFieldsUpdate,
   // validatePets.validateDataType,
 

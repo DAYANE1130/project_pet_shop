@@ -14,6 +14,32 @@
     "/pet": {
       "post": {
         "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "dono_id": {
+                  "example": "any"
+                },
+                "tipo": {
+                  "example": "any"
+                },
+                "nome": {
+                  "example": "any"
+                },
+                "idade": {
+                  "example": "any"
+                },
+                "raca": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
         "responses": {
           "default": {
             "description": ""
@@ -48,7 +74,7 @@
           }
         }
       },
-      "patch": {
+      "delete": {
         "description": "",
         "parameters": [
           {
@@ -64,7 +90,7 @@
           }
         }
       },
-      "delete": {
+      "patch": {
         "description": "",
         "parameters": [
           {
@@ -84,6 +110,41 @@
     "/dono": {
       "post": {
         "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "nome": {
+                  "example": "any"
+                },
+                "email": {
+                  "example": "any"
+                },
+                "telefone": {
+                  "example": "any"
+                },
+                "rua": {
+                  "example": "any"
+                },
+                "numero": {
+                  "example": "any"
+                },
+                "cidade": {
+                  "example": "any"
+                },
+                "estado": {
+                  "example": "any"
+                },
+                "cep": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
         "responses": {
           "default": {
             "description": ""
