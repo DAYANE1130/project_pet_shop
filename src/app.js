@@ -9,6 +9,7 @@ const app = express();
 app.use(express.json());
 
 app.use('/', routes.usersRoutes);
+app.use('/', routes.loginRoutes);
 app.use('/', routes.petsRoutes);
 app.use('/', routes.donosRoutes);
 
