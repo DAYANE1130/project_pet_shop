@@ -6,17 +6,6 @@ const getKeysAndValues = async (body) => {
   dataBody = { keys, values };
   return dataBody;
 };
-
-const responseFormatedDono = async (array) => {
-  const dataFormated = array.map((element) => {
-    const { id, nome, email, telefone, rua, numero, cidade, estado, cep } = element;
-    const personalData = { id, nome, email, telefone };
-    const address = { rua, numero, cidade, estado, cep };
-    return { ...personalData, address };
-  });
-  return dataFormated;
-};
-
 const verifyFormatEmail = (email) => {
   const regex = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/;
   return regex.test(email);
@@ -45,7 +34,6 @@ const verifyFieldsIsNotBlank = (data) => {
 
 module.exports = {
   getKeysAndValues,
-  responseFormatedDono,
   verifyFormatEmail,
   verifyPasswordStrength,
   verifyDataIsString,
