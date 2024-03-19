@@ -1,6 +1,6 @@
 const petsModels = require('../models/petsModels');
 const donosModels = require('../models/donosModels');
-const { getKeysAndValues } = require('../utils');
+const { getKeysAndValues } = require('../utils/dataUtils');
 
 const create = async (data) => {
   const { dono_id: donoId } = data;

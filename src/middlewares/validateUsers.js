@@ -3,7 +3,7 @@ const {
   verifyFieldsIsNotBlank,
   verifyDataIsString,
   verifyFormatEmail,
-  verifyPasswordStrength } = require('../utils');
+  verifyPasswordStrength } = require('../utils/validationUtils');
 
 const passwordRule = 'Password must have uppercase and uppercase letters,numbers between 0 and 9';
 const symbolsRule = 'and any of the special characters :@!#$%^&*';
@@ -19,6 +19,15 @@ const errors = {
 const validateFields = (req, _res, next) => {
   const { first_name: firstName, last_name: lastName, email, password } = req.body;
   const fields = [firstName, lastName, email, password];
+  if (!verifyFieldsIsNotBlank(fields)) {
+    return next({ status: StatusCodes.BAD_REQUEST, message: errors.fieldsIsBlank });
+  }
+  next();
+};
+
+const validateFieldsLogin = (req, _res, next) => {
+  const { email, password } = req.body;
+  const fields = [email, password];
   if (!verifyFieldsIsNotBlank(fields)) {
     return next({ status: StatusCodes.BAD_REQUEST, message: errors.fieldsIsBlank });
   }
@@ -53,4 +62,9 @@ const validatePassword = (req, _res, next) => {
   next();
 };
 
-module.exports = { validateFields, validateDataType, validateEmail, validatePassword };
+module.exports = { 
+  validateFields, 
+  validateFieldsLogin, 
+  validateDataType, 
+  validateEmail,
+  validatePassword };
