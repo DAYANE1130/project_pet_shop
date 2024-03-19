@@ -28,10 +28,10 @@ const getById = async (id) => {
 };
 
 const update = async (id, body) => {
-  const singleStringKeys = body.keys.join(); 
+  const singleStringKeys = body.keys.join();
   const query = `UPDATE pet_shop.donos SET ${singleStringKeys} WHERE id=?`;
-  const [{ insertId }] = await connection.execute(query, [...body.values, id]);
-  return { insertId, updatedData: body.values };
+  const [{ affectedRows }] = await connection.execute(query, [...body.values, id]);
+  return { affectedRows, updatedData: body.values };
 };
 
 const remove = async (id) => {
