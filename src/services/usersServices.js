@@ -1,7 +1,11 @@
 const bcrypt = require('bcrypt');
 const usersModels = require('../models/usersModels');
+const loginModels = require('../models/loginModels');
 
 const create = async (data) => {
+  const { email } = data;
+  const checkIfUserExists = await loginModels.loginUser(email);
+  if (checkIfUserExists) return false;
   const saltRounds = 10;
   const copyData = { ...data };
   const { password } = copyData; // extraindo password

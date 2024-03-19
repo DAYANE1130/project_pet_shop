@@ -15,6 +15,7 @@
     "Tabela banco de dados",
     "Middleware de Validacoes",
     "validacoes",
-    "utils"
+    "utils",
+    "User"
   ]
 }
