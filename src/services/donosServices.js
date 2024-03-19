@@ -1,8 +1,18 @@
 const donosModels = require('../models/donosModels');
-const { responseFormatedDono } = require('../utils');
-const { getKeysAndValues } = require('../utils');
+
+const { getKeysAndValues } = require('../utils/dataUtils');
+const { responseFormatedDono } = require('../utils/responseUtils.js');
+
+const isEmailRegistered = async (email) => {
+  const user = await donosModels.getByEmail(email);
+  if (!user || user.length === 0) return false;
+  return true;
+};
 
 const create = async (data) => {
+  const { email } = data;
+  const checkIfOwnerExists = await isEmailRegistered(email);
+  if (checkIfOwnerExists) return false;
   const newDono = await donosModels.create(data);
   return newDono;
 };
@@ -25,7 +35,7 @@ const update = async (id, body) => {
   if (!findDono) return false;
   const bodyDono = await getKeysAndValues(body);
   const donoUpdated = await donosModels.update(id, bodyDono);
- return donoUpdated;
+  return donoUpdated;
 };
 
 const remove = async (id) => {

@@ -9,9 +9,17 @@ route.post('/dono',
   validateDonos.validateEmail,
   validateToken.verifyToken,
   donosControllers.create);
+
 route.get('/donos/', donosControllers.getAll);
+
 route.get('/dono/:id', donosControllers.getById);
-route.patch('/dono/:id', donosControllers.update);
+
+route.patch('/dono/:id',
+validateDonos.validateFieldsPatch,
+validateDonos.validateDataTypePatch, 
+validateDonos.validateEmail,
+donosControllers.update);
+
 route.delete('/dono/:id', donosControllers.remove);
 
 module.exports = route;

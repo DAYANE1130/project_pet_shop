@@ -1,10 +1,11 @@
 const { StatusCodes } = require('http-status-codes');
 const donosServices = require('../services/donosServices');
 
-const create = async (req, res) => {
+const create = async (req, res, next) => {
   const data = req.body;
-  const newDono = await donosServices.create(data);
-  return res.status(StatusCodes.OK).json(newDono);
+  const dono = await donosServices.create(data);
+  if (!dono) return next({ status: StatusCodes.BAD_REQUEST, message: 'Email already registered' });
+  return res.status(StatusCodes.OK).json(dono);
 };
 
 const getAll = async (req, res) => {

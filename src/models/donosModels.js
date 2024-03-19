@@ -9,6 +9,12 @@ const create = async (data) => {
   return { id: insertId, ...data };
 };
 
+const getByEmail = async (email) => {
+  const query = 'SELECT * FROM pet_shop.donos WHERE email=?';
+  const [dono] = await connection.execute(query, [email]);
+  return dono;
+};
+
 const getAll = async () => {
   const query = 'SELECT * FROM pet_shop.donos';
   const [donos] = await connection.execute(query);
@@ -22,7 +28,8 @@ const getById = async (id) => {
 };
 
 const update = async (id, body) => {
-  const query = `UPDATE pet_shop.donos SET ${body.keys} WHERE id=?`;
+  const singleStringKeys = body.keys.join(); 
+  const query = `UPDATE pet_shop.donos SET ${singleStringKeys} WHERE id=?`;
   const [{ insertId }] = await connection.execute(query, [...body.values, id]);
   return { insertId, updatedData: body.values };
 };
@@ -33,4 +40,4 @@ const remove = async (id) => {
   return donoDeleted;
 };
 
-module.exports = { create, getAll, getById, update, remove };
+module.exports = { create, getByEmail, getAll, getById, update, remove };

@@ -10,7 +10,6 @@ const loginUser = async (email, password) => {
   if (!user) return false;
 
   const compare = comparePassword.comparePassword(password, user.password);
-
   if (!compare) return { errorPassword: 'error' };
 
   const token = jwt.generateToken(email);
