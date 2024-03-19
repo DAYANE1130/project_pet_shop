@@ -16,21 +16,21 @@ const getAll = async (req, res) => {
 const getById = async (req, res, next) => {
   const { id } = req.params;
   const pet = await petsServices.getById(id);
-  if (!pet) return next({ status: StatusCodes.NOT_FOUND, message: 'Dono not found' });
+  if (!pet) return next({ status: StatusCodes.NOT_FOUND, message: 'Pet not found' });
   return res.status(StatusCodes.OK).json(pet);
 };
 
 const update = async (req, res, next) => {
   const { id } = req.params;
   const petEdited = await petsServices.update(Number(id), req.body);
-  if (!petEdited) return next({ status: StatusCodes.NOT_FOUND, message: 'Dono not found' });
+  if (!petEdited) return next({ status: StatusCodes.NOT_FOUND, message: 'Pet not found' });
   return res.status(StatusCodes.OK).json(petEdited);
 };
 
 const remove = async (req, res, next) => {
   const { id } = req.params;
   const petDeleted = await petsServices.remove(Number(id));
-  if (!petDeleted) return next({ status: StatusCodes.NOT_FOUND, message: 'Dono not found' });
+  if (!petDeleted) return next({ status: StatusCodes.NOT_FOUND, message: 'Pet not found' });
   return res.status(StatusCodes.OK).json({ message: ' Pet successfully deleted ' });
 };
 
