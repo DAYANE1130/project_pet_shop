@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha 'src/tests/unit/**/*.js' --exit",
+    "test-coverage": "nyc mocha 'src/tests/unit/**/*.js' --exit",
     "start": "node src/server.js",
+    "mysql": "sudo systemctl start mysql",
     "swagger-autogen": "node src/swagger.js",
     "dev": "nodemon src/server.js",
     "lint": "eslint --no-inline-config --no-error-on-unmatched-pattern -c .eslintrc.json .",
@@ -35,6 +37,7 @@
     "husky": "^8.0.3",
     "mocha": "8.4.0",
     "nodemon": "2.0.15",
+    "nyc": "^15.1.0",
     "sinon": "11.1.1"
   }
 }
