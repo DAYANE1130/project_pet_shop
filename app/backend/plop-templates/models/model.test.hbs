@@ -1,0 +1,69 @@
+/* eslint-disable func-names */
+/* eslint-disable prefer-arrow-callback */
+/* eslint-env mocha */
+const { expect } = require('chai');
+const sinon = require('sinon');
+
+const connection = require('../../../models/connection');
+const {{modelName}}Models = require('../../../models/{{modelName}}Models');
+const {{modelName}}Mocks = require('./mocks/{{modelName}}.model.mock');
+
+afterEach(function () {
+ sinon.restore();
+});
+
+describe('Testa função "create" de {{modelName}} na camada model', function () {
+ before(function () {
+    sinon.stub(connection, 'execute').resolves({{modelName}}Mocks.create{{modelName}});
+ });
+
+ it('Deve retornar o objeto correto ao criar um novo {{modelName}}', async function () {
+    const response = await {{modelName}}Models.create({{modelName}}Mocks.dataCreate{{modelName}});
+    expect(response).to.deep.equal({{modelName}}Mocks.returnCreate{{modelName}});
+ });
+});
+
+describe('Testa função "getAll" de {{modelName}} na camada model', function () {
+ before(function () {
+    sinon.stub(connection, 'execute').resolves([{{modelName}}Mocks.petsList]);
+ });
+
+ it('Deve retornar uma lista de todos os {{modelName}} quando chamada', async function () {
+    const response = await {{modelName}}Models.getAll();
+    expect(response).to.equal({{modelName}}Mocks.petsList);
+ });
+});
+
+describe('Testa função "getById" de {{modelName}} na camada model', function () {
+ before(function () {
+    sinon.stub(connection, 'execute').resolves([[{{modelName}}Mocks.petId]]);
+ });
+
+ it('Deve retornar o {{modelName}} correto quando chamada com um id específico', async function () {
+    const response = await {{modelName}}Models.getById(3);
+    expect(response).to.equal({{modelName}}Mocks.petId);
+ });
+});
+
+describe('Testa função "update" de {{modelName}} na camada model', function () {
+ before(function () {
+    sinon.stub(connection, 'execute').resolves({{modelName}}Mocks.returnUpdated{{modelName}});
+ });
+
+ it('Deve atualizar corretamente os dados de um {{modelName}} quando chamada com um id e dados atualizados',
+    async function () {
+      const response = await {{modelName}}Models.update(4, {{modelName}}Mocks.keys{{modelName}}Updated);
+      expect(response).to.deep.equal({{modelName}}Mocks.{{modelName}}Updated);
+    });
+});
+
+describe('Testa função "remove" de {{modelName}} na camada model', function () {
+ before(function () {
+    sinon.stub(connection, 'execute').resolves([{{modelName}}Mocks.petDeleted]);
+ });
+
+ it('Deve remover corretamente um {{modelName}} quando chamada com um id específico', async function () {
+    const response = await {{modelName}}Models.remove(4);
+    expect(response).to.equal({{modelName}}Mocks.petDeleted);
+ });
+});
