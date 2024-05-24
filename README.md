@@ -9,6 +9,7 @@ Este projeto Back-end é uma API RESTful desenvolvida com Node.js e Express. A A
 - Node.js
 - Express
 - MySQL - Banco de dados
+- Docker Compose
 - JWT (JSON Web Token) - para autenticação e autorizar o acesso do usuário a rotas específicas.
 - Mocha, Chai e Sinon - para testes.
 - Eslint - para linting do código.
