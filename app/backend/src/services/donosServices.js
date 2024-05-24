@@ -1,7 +1,7 @@
-const donosModels = require('../models/donosModels.js');
+const donosModels = require('../models/donosModels');
 
-const { getKeysAndValues } = require('../utils/dataUtils.js');
-const { responseFormatedDono } = require('../utils/responseUtils.js.js');
+const { getKeysAndValues } = require('../utils/dataUtils');
+const { responseFormatedDono } = require('../utils/responseUtils.js');
 
 const isEmailRegistered = async (email) => {
   const user = await donosModels.getByEmail(email);
