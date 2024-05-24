@@ -14,7 +14,7 @@ Este projeto consiste em uma API desenvolvida em Node.js que tem como objetivo g
 
 ## Estrutura do Projeto
 
-O projeto segue a estrutura MVC (Model-View-Controller) para uma organização modular e escalável do código.
+O projeto segue a estrutura MSC (Model-Service-Controller) para uma organização modular e escalável do código.
 
 - `src/`
   - `controllers/`: Contém os controladores que lidam com as requisições HTTP e chamam os serviços apropriados.
